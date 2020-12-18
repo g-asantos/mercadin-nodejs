@@ -14,19 +14,21 @@ class Utilities{
     }
 
     geraCompra(produtos){
+        const compra = new Compra;
+
         for(let i = 0; i < produtos.length; i++){
-            if(this.getRandomNumber(0,1) == 1){
+            if(this.getRandomNumber(0,2) === 1){
                
-                const repeated = Compra.produtos.find(element => element == produtos[i])
+                const repeated = compra.produtos.find(element => element == produtos[i])
                 if(repeated){
                     break;
                 }
-                console.log(this.getRandomNumber(0,1) )
-                Compra.produtos.push(produtos[i]);
+           
+                compra.produtos.push(produtos[i]);
             }
         }
   
-        return Compra;
+        return compra;
     }
 
     getRandomNumber = (min, max) => {

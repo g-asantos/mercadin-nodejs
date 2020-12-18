@@ -22,4 +22,4 @@ class Compra{
     }
 }
 
-module.exports = new Compra;
+module.exports = Compra;

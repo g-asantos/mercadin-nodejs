@@ -16,6 +16,7 @@ class Compras{
         let nome;
         let preco;
 
+
         var questions = [{
             type: 'expand',
             name: 'select',
@@ -79,7 +80,7 @@ class Compras{
                 
                 cli.getCompra().imprimeItens();
 
-                console.log("por " + `R$ ${cli.getCompra().valorGasto()},00` + "\n");
+                console.log("por " + `R$ ${cli.getCompra().valorGasto().toFixed(2)}` + "\n");
 
                 this.main();
 
