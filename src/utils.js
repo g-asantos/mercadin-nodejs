@@ -15,19 +15,23 @@ class Utilities{
 
     geraCompra(produtos){
         for(let i = 0; i < produtos.length; i++){
-            if(Math.round(Math.random()) < 1){
-                
+            if(this.getRandomNumber(0,1) == 1){
+               
                 const repeated = Compra.produtos.find(element => element == produtos[i])
                 if(repeated){
                     break;
                 }
-
+                console.log(this.getRandomNumber(0,1) )
                 Compra.produtos.push(produtos[i]);
             }
         }
   
         return Compra;
     }
+
+    getRandomNumber = (min, max) => {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      };
 }
 
 module.exports = new Utilities;

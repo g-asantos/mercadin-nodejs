@@ -2,3 +2,5 @@ Projeto originalmente desenvolvido em Java durante a FlowTalents, no qual resolv
 
 
 // WORK IN PROGRESS
+
+Não totalmente satisfeito com a aleatoriedade ao executar a simulação
