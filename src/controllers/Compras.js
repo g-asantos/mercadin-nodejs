@@ -37,11 +37,23 @@ class Compras{
                     name:  "Encerrar",
                     value: "x",
                 },  
+                
             ]
-          }]
+          },
+          {
+            type: "input",
+            name: "product",
+            message: "Digite o nome do produto",
+        },
+        {
+            type: "input",
+            name: "value",
+            message: "Digite o preço do produto",
+        }
+        ]
 
 
-          inquirer.prompt(questions).then((answer) => {
+          inquirer.prompt(questions[0]).then((answer) => {
 
             const choice = (answer.select).toUpperCase()
       
@@ -49,19 +61,11 @@ class Compras{
 
             if(choice == "P"){
 
-                inquirer.prompt({
-                    type: "input",
-                    name: "product",
-                    message: "Digite o nome do produto",
-                }).then((answer) => {
+                inquirer.prompt(questions[1]).then((answer) => {
                     nome = answer.product;
     
     
-                    inquirer.prompt({
-                        type: "input",
-                        name: "value",
-                        message: "Digite o preço do produto",
-                    }).then((answer) => {
+                    inquirer.prompt(questions[2]).then((answer) => {
                         preco = answer.value;
                         
                         const produtoFinal = new produto(nome, preco);
