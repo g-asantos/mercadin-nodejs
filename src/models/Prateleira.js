@@ -1,18 +1,18 @@
-class Prateleira{
+class Prateleira {
+  constructor() {
+    this.produtos = [];
+  }
 
-    constructor(){
-        this.produtos = [];
+  adicionarProduto(produto) {
+    this.produtos.push(produto);
+    console.log('\nProduto adicionado!\n');
+    for (let i = 0; i < this.produtos.length; i++) {
+      console.log(
+        `${this.produtos[i].getNome()}: ` +
+          `R$ ${this.produtos[i].getPreco()},00`,
+      );
     }
-
-
-    adicionarProduto(produto){
-        this.produtos.push(produto);
-        console.log('\nProduto adicionado!\n');
-        for(let i = 0; i < this.produtos.length; i++){
-            console.log(this.produtos[i].getNome() + ": " + `R$ ${this.produtos[i].getPreco()},00`);
-        }
-
-    }
+  }
 }
 
-module.exports = new Prateleira;
+module.exports = new Prateleira();

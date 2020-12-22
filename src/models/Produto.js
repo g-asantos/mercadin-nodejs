@@ -1,25 +1,24 @@
-class Produto{
+class Produto {
+  constructor(nome, preco) {
+    this.nome = nome;
+    this.preco = preco;
+  }
 
-    constructor(nome, preco){
-        this.nome = nome;
-        this.preco = preco;
-    }
+  getNome() {
+    return this.nome;
+  }
 
-    getNome(){
-        return this.nome;
-    }
+  setNome(nome) {
+    this.nome = nome;
+  }
 
-    setNome(nome){
-        this.nome = nome;
-    }
+  getPreco() {
+    return this.preco;
+  }
 
-    getPreco(){
-        return this.preco;
-    }
-
-    setPreco(preco){
-        this.preco = preco;
-    }
+  setPreco(preco) {
+    this.preco = preco;
+  }
 }
 
 module.exports = Produto;
