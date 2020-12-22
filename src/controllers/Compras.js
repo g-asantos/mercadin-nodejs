@@ -52,8 +52,16 @@ class Compras {
           inquirer.prompt(questions[1]).then(productName => {
             nome = productName.product;
 
+            if (!nome.match('/^[A-Za-z]+$/')) {
+              throw new Error('Insert only letters');
+            }
+
             inquirer.prompt(questions[2]).then(productPrice => {
               preco = productPrice.value;
+
+              if (!preco.match('^[0-9]*$')) {
+                throw new Error('Insert only numbers');
+              }
 
               const produtoFinal = new Produto(nome, preco);
               prateleira.adicionarProduto(produtoFinal);
