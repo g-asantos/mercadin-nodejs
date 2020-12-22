@@ -1,6 +1,11 @@
-const Compra = require('./models/Compra');
+import Produto from "models/Produto";
+
+import Compra from './models/Compra';
 
 class Utilities {
+  private nomes: Array<string>
+
+
   constructor() {
     this.nomes = [
       'Sophie',
@@ -26,28 +31,28 @@ class Utilities {
     return this.nomes[randomNumber];
   }
 
-  geraCompra(produtos) {
+  geraCompra(produtos: Array<Produto>) {
     const compra = new Compra();
 
     for (let i = 0; i < produtos.length; i++) {
       if (this.getRandomNumber(0, 2) === 1) {
-        const repeated = compra.produtos.find(
-          element => element === produtos[i],
+        const repeated = compra.getProdutos().find(
+          (element: Produto) => element === produtos[i],
         );
         if (repeated) {
           break;
         }
 
-        compra.produtos.push(produtos[i]);
+        compra.getProdutos().push(produtos[i]);
       }
     }
 
     return compra;
   }
 
-  getRandomNumber(min, max) {
+  getRandomNumber(min: number, max: number) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 }
 
-module.exports = new Utilities();
+export default new Utilities();

@@ -1,9 +1,14 @@
+import Produto from "./Produto";
+
 class Prateleira {
+  private produtos: Array<Produto>;
+
+
   constructor() {
     this.produtos = [];
   }
 
-  adicionarProduto(produto) {
+  adicionarProduto(produto: Produto) {
     this.produtos.push(produto);
     console.log('\nProduto adicionado!\n');
     for (let i = 0; i < this.produtos.length; i++) {
@@ -13,6 +18,11 @@ class Prateleira {
       );
     }
   }
+
+  getProdutos(){
+    return this.produtos;
+  }
+
 }
 
-module.exports = new Prateleira();
+export default new Prateleira();

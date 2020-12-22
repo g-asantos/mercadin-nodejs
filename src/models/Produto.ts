@@ -1,5 +1,9 @@
+
 class Produto {
-  constructor(nome, preco) {
+  private nome: string;
+  private preco: string;
+
+  constructor(nome: string, preco: string) {
     this.nome = nome;
     this.preco = preco;
   }
@@ -8,7 +12,7 @@ class Produto {
     return this.nome;
   }
 
-  setNome(nome) {
+  setNome(nome: string) {
     this.nome = nome;
   }
 
@@ -16,9 +20,9 @@ class Produto {
     return this.preco;
   }
 
-  setPreco(preco) {
+  setPreco(preco: string) {
     this.preco = preco;
   }
 }
 
-module.exports = Produto;
+export default Produto;

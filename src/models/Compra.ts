@@ -1,4 +1,10 @@
+import Produto from "./Produto";
+
+
+
 class Compra {
+  private produtos: Array<Produto>
+
   constructor() {
     this.produtos = [];
   }
@@ -7,7 +13,7 @@ class Compra {
     let soma = 0;
 
     for (let i = 0; i < this.produtos.length; i++) {
-      soma += Number(this.produtos[i].preco);
+      soma += Number(this.produtos[i].getPreco());
     }
 
     return soma;
@@ -18,6 +24,10 @@ class Compra {
       console.log(`${this.produtos[i].getNome()},`);
     }
   }
+
+  getProdutos(){
+    return this.produtos;
+  }
 }
 
-module.exports = Compra;
+export default Compra;
