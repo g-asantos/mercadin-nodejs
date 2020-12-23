@@ -5,12 +5,12 @@ import Produto from '../models/Produto';
 import prateleira from '../models/Prateleira';
 
 class Compras {
-  main() {
+  async main() {
     try {
       let nome: string;
       let preco: string;
 
-      const initialQuestion =
+      const perguntaInicial =
         [{
           type: 'expand',
           name: 'select',
@@ -34,61 +34,66 @@ class Compras {
           ],
         }];
 
-        const nameQuestion = [{
+        const perguntaNome = [{
           type: 'input',
           name: 'product',
           message: 'Digite o nome do produto',
         }];
 
-        const priceQuestion = [{
+        const perguntaPreco = [{
           type: 'input',
           name: 'value',
           message: 'Digite o preço do produto',
         }];
 
-      inquirer.prompt(initialQuestion).then(answer => {
-        const choice = answer.select.toUpperCase();
 
-        if (choice === 'P') {
-          inquirer.prompt(nameQuestion).then(productName => {
-            nome = productName.product;
+      const respostaInicial = await inquirer.prompt(perguntaInicial);
 
-            const lettersOnlyRegex = /^[A-Za-z]+$/;
-            if (!nome.match(lettersOnlyRegex)) {
-              throw new Error('Insert only letters');
-            }
+      const escolha = respostaInicial.select.toUpperCase();
 
-            inquirer.prompt(priceQuestion).then(productPrice => {
-              preco = productPrice.value;
+      if(escolha === 'P'){
 
-              const numbersOnlyRegex = /^[0-9]*$/;
+        const nomeDoProduto = await inquirer.prompt(perguntaNome);
 
-              if (!preco.match(numbersOnlyRegex)) {
-                throw new Error('Insert only numbers');
-              }
+        nome = nomeDoProduto.product;
 
-              const produtoFinal = new Produto(nome, preco);
-              prateleira.adicionarProduto(produtoFinal);
-              this.main();
-            });
-          });
-        } else if (choice === 'S') {
-          const cli = new Cliente(
-            utils.geraNome(),
-            utils.geraCompra(prateleira.getProdutos()),
-          );
+        const apenasLetrasRegex = /^[A-Za-z]+$/;
 
-          console.log(`\n\n${cli.getNome()} comprou: `);
 
-          cli.getCompra().imprimeItens();
-
-          console.log(`por R$ ${cli.getCompra().valorGasto().toFixed(2)}\n`);
-
-          this.main();
-        } else {
-          return;
+        if (!nome.match(apenasLetrasRegex)) {
+              throw new Error('Insira apenas letras');
         }
-      });
+
+        const precoDoProduto = await inquirer.prompt(perguntaPreco);
+
+        preco = precoDoProduto.value;
+
+        const apenasNumerosRegex = /^[0-9]*$/;
+
+        if (!preco.match(apenasNumerosRegex)) {
+                throw new Error('Insira apenas numeros');
+        }
+
+        const produtoFinal = new Produto(nome, preco);
+        prateleira.adicionarProduto(produtoFinal);
+        this.main()
+      } else if(escolha === 'S'){
+        const cli = new Cliente(
+          utils.geraNome(),
+          utils.geraCompra(prateleira.getProdutos()),
+        );
+
+        console.log(`\n\n${cli.getNome()} comprou: `);
+
+        cli.getCompra().imprimeItens();
+
+        console.log(`por R$ ${cli.getCompra().valorGasto().toFixed(2)}\n`);
+
+        this.main();
+      } else{
+        return;
+      }
+
     } catch (err) {
       console.log(err);
     }
