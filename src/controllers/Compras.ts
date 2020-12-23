@@ -1,17 +1,17 @@
-const inquirer = require('inquirer');
-const utils = require('../utils');
-const Cliente = require('../models/Cliente');
-const Produto = require('../models/Produto');
-const prateleira = require('../models/Prateleira');
+import inquirer from 'inquirer';
+import utils from '../utils';
+import Cliente from '../models/Cliente';
+import Produto from '../models/Produto';
+import prateleira from '../models/Prateleira';
 
 class Compras {
   main() {
     try {
-      let nome;
-      let preco;
+      let nome: string;
+      let preco: string;
 
-      const questions = [
-        {
+      const initialQuestion =
+        [{
           type: 'expand',
           name: 'select',
           message: `Bem-vindo ao Mercadin!\n(P) Cadastrar produto\n(S) Executar simulação\n(X) Encerrar`,
@@ -32,34 +32,38 @@ class Compras {
               value: 'x',
             },
           ],
-        },
-        {
+        }];
+
+        const nameQuestion = [{
           type: 'input',
           name: 'product',
           message: 'Digite o nome do produto',
-        },
-        {
+        }];
+
+        const priceQuestion = [{
           type: 'input',
           name: 'value',
           message: 'Digite o preço do produto',
-        },
-      ];
+        }];
 
-      inquirer.prompt(questions[0]).then(answer => {
+      inquirer.prompt(initialQuestion).then(answer => {
         const choice = answer.select.toUpperCase();
 
         if (choice === 'P') {
-          inquirer.prompt(questions[1]).then(productName => {
+          inquirer.prompt(nameQuestion).then(productName => {
             nome = productName.product;
 
-            if (!nome.match('/^[A-Za-z]+$/')) {
+            const lettersOnlyRegex = /^[A-Za-z]+$/;
+            if (!nome.match(lettersOnlyRegex)) {
               throw new Error('Insert only letters');
             }
 
-            inquirer.prompt(questions[2]).then(productPrice => {
+            inquirer.prompt(priceQuestion).then(productPrice => {
               preco = productPrice.value;
 
-              if (!preco.match('^[0-9]*$')) {
+              const numbersOnlyRegex = /^[0-9]*$/;
+
+              if (!preco.match(numbersOnlyRegex)) {
                 throw new Error('Insert only numbers');
               }
 
@@ -71,7 +75,7 @@ class Compras {
         } else if (choice === 'S') {
           const cli = new Cliente(
             utils.geraNome(),
-            utils.geraCompra(prateleira.produtos),
+            utils.geraCompra(prateleira.getProdutos()),
           );
 
           console.log(`\n\n${cli.getNome()} comprou: `);
@@ -91,4 +95,4 @@ class Compras {
   }
 }
 
-module.exports = new Compras();
+export default new Compras();

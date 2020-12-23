@@ -1,5 +1,12 @@
+import Compra from "./Compra";
+
+
 class Cliente {
-  constructor(nome, compra) {
+  private nome: string;
+  private compra: Compra;
+
+
+  constructor(nome: string, compra: Compra) {
     this.nome = nome;
     this.compra = compra;
   }
@@ -8,7 +15,7 @@ class Cliente {
     return this.nome;
   }
 
-  setNome(nome) {
+  setNome(nome: string) {
     this.nome = nome;
   }
 
@@ -16,9 +23,9 @@ class Cliente {
     return this.compra;
   }
 
-  setCompra(compra) {
+  setCompra(compra: Compra) {
     this.compra = compra;
   }
 }
 
-module.exports = Cliente;
+export default Cliente;

@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express';
 
 const server = express();
 
-const compras = require('./controllers/Compras');
+import compras from './controllers/Compras';
 
 server.use(express.urlencoded({ extended: true }));
 
