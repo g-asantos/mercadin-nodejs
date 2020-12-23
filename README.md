@@ -30,6 +30,7 @@ npm start
 - NodeJS
 - Express
 - Inquirer
+- Typescript
 
 
 
